@@ -1,0 +1,11 @@
+# folders
+node_modules
+
+
+# environment
+.env
+
+
+
+# log
+server.log
