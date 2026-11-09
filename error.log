@@ -1,0 +1,13 @@
+2026-11-09T10:21:45.466Z - GET /projects
+ 'error.log', Server Error: relation "projjects" does not exist 
+2026-11-09T10:22:00.303Z - GET /projects
+ 'error.log', Server Error: relation "projjects" does not exist 
+2026-11-09T10:23:07.498Z - GET /projects
+'error.log', Server Error: relation "projjects" does not exist 
+2026-11-09T10:23:31.290Z - GET /projects
+ Server Error: relation "projjects" does not exist 
+2026-11-09T10:24:06.641Z - GET /projects
+  Server Error: relation "projjects" does not exist 
+2026-11-09T10:24:54.887Z - GET /projects
+  
+        Server Error: relation "projjects" does not exist 
