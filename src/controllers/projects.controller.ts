@@ -1,15 +1,19 @@
 import { type RequestHandler } from "express";
 import { pool } from "../lib/db.js";
+import {
+  createProject,
+  findAllProjects,
+  updateProject,
+} from "../repositories/projects.repository.js";
 
 export const getProjectsController: RequestHandler = async (req, res, next) => {
   try {
-    const result = await pool.query("SELECT * FROM projects ORDER BY id ASC");
-    res.status(200).json({ success: true, data: result.rows });
+    const data = await findAllProjects();
+    res.status(200).json({ success: true, data });
   } catch (error: any) {
     next(error);
   }
 };
-
 
 export const createProjectController: RequestHandler = async (
   req,
@@ -18,23 +22,15 @@ export const createProjectController: RequestHandler = async (
 ) => {
   try {
     const { name, status } = req.body;
-    const result = await pool.query(
-      `INSERT INTO projects (name, status) 
-         VALUES ($1, $2)
-         RETURNING id, name, status;`,
-      [name, status],
-    );
+    const result = await createProject({ name, status });
     res.status(201).json({
       sucess: true,
       message: "project created sucessfully",
-      data: result.rows[0],
+      data: result[0],
     });
   } catch (err) {
     next(err);
   }
-  // add to db.
-  //handle success or failure
-  //send response with data
 };
 
 export const updateProjectController: RequestHandler = async (
@@ -52,17 +48,9 @@ export const updateProjectController: RequestHandler = async (
 
   try {
     const { name, status } = req.body;
-    const result = await pool.query(
-      `UPDATE projects
-          SET 
-            name = COALESCE($1, name),
-            status = COALESCE($2, status)
-            WHERE id = $3
-            RETURNING id, name, status;`,
-      [name ?? null, status ?? null, id],
-    );
+    const result = await updateProject({ name, status, id });
 
-    if (result.rows.length === 0) {
+    if (result.length === 0) {
       return res.status(404).json({
         success: false,
         message: "Project not found",
@@ -72,7 +60,7 @@ export const updateProjectController: RequestHandler = async (
     return res.status(200).json({
       success: true,
       message: "Project updated successfully",
-      data: result.rows[0],
+      data: result[0],
     });
   } catch (err) {
     next(err);
@@ -114,4 +102,4 @@ export const deleteProjectsController: RequestHandler = async (
   } catch (err) {
     next(err);
   }
-}; 
+};

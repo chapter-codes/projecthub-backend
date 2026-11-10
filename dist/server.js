@@ -2,16 +2,9 @@ import express from "express";
 import fsP from "node:fs/promises";
 import { pool } from "./lib/db.js";
 import { errorHandler } from "./middlewares/error-handler.js";
-import { validateBody } from "./middlewares/validate.js";
-import { createProjectSchema, updateProjectSchema, } from "./schemas/project.schema.js";
-import { number } from "zod";
 // controllers import
 import projectsRoutes from './routes/projects.routes.js';
 const PORT = process.env.PORT || 8000;
-const projects = [
-    { id: 1, name: "ProjectHub API", status: "in-progress" },
-    { id: 2, name: "Portfolio Website", status: "completed" },
-];
 const app = express();
 // middlewares
 app.use(express.json()); // parse incoming request body
