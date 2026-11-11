@@ -23,4 +23,11 @@ export const updateProject = async ({ name, status, id }) => {
     const result = await pool.query(query, [name ?? null, status ?? null, id]);
     return result.rows;
 };
+export const deleteProject = async (id) => {
+    const query = `
+    DELETE FROM projects WHERE id = $1
+          RETURNING id, name, status;`;
+    const result = await pool.query(query, [id]);
+    return result.rows;
+};
 //# sourceMappingURL=projects.repository.js.map

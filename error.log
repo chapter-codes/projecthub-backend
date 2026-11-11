@@ -11,3 +11,17 @@
 2026-11-09T10:24:54.887Z - GET /projects
   
         Server Error: relation "projjects" does not exist 
+2026-11-11T00:29:03.067Z - PATCH /projects/23
+ 
+       Error Log: Cannot read properties of undefined (reading 'length')2026-11-11T00:29:42.558Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length')2026-11-11T00:30:00.282Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length')2026-11-11T00:30:30.049Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length') 
+2026-11-11T00:30:38.625Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length') 
+2026-11-11T00:30:40.494Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length') 
+2026-11-11T00:45:22.493Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length') 
+2026-11-11T00:47:22.029Z - PATCH /projects/23
+  Error Log: Cannot read properties of undefined (reading 'length') 

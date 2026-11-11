@@ -1,5 +1,9 @@
 import { pool } from "../lib/db.js";
-import type { CreateProjectDTO, UpdateProjectDTO } from "../types/projects.types.js";
+import type {
+  CreateProjectDTO,
+  DeleteProjectDTO,
+  UpdateProjectDTO,
+} from "../types/projects.types.js";
 
 export const findAllProjects = async () => {
   const query = `SELECT * FROM projects ORDER BY id ASC`;
@@ -8,17 +12,15 @@ export const findAllProjects = async () => {
   return result.rows;
 };
 
-
-export const createProject = async ({name, status}: CreateProjectDTO) => {
+export const createProject = async ({ name, status }: CreateProjectDTO) => {
   const query = `
         INSERT INTO projects (name, status) 
          VALUES ($1, $2)
          RETURNING id, name, status;`;
-    const result = await pool.query(query, [name, status])
+  const result = await pool.query(query, [name, status]);
 
-    return result.rows
+  return result.rows;
 };
-
 
 export const updateProject = async ({ name, status, id }: UpdateProjectDTO) => {
   const query = `
@@ -33,3 +35,10 @@ export const updateProject = async ({ name, status, id }: UpdateProjectDTO) => {
   return result.rows;
 };
 
+export const deleteProject = async (id: DeleteProjectDTO) => {
+  const query = `
+    DELETE FROM projects WHERE id = $1
+          RETURNING id, name, status;`;
+  const result = await pool.query(query, [id]);
+  return result.rows;
+};
